@@ -4,17 +4,18 @@ import { FormDatePicker } from "@/components/form-date-picker";
 import { FormInput } from "@/components/form-input";
 import { FormWrapper } from "@/components/form-wrapper";
 import { Button } from "@/components/ui/button";
-import { useFlight } from "../hooks/use-flight";
+import { useUpdateFlight } from "../hooks/use-update-flight";
+import { Flight } from "../types";
 
-export const FlightForm = () => {
-  const { mutate, isPending, form } = useFlight();
+export const UpdateFlightForm = ({ flight }: { flight: Flight }) => {
+  const { updateFlight, isPending, form } = useUpdateFlight(flight);
 
   return (
     <FormWrapper
       form={form}
-      onSubmit={mutate}
-      title="Create a New Flight"
-      description="Add flight details to the system."
+      onSubmit={updateFlight}
+      title="Update"
+      description="Update the flight"
     >
       <FormInput name="airline" control={form.control} disabled={isPending} />
       <FormInput
@@ -31,19 +32,13 @@ export const FlightForm = () => {
       />
       <FormDatePicker control={form.control} name="date" disabled={isPending} />
       <FormInput
-        control={form.control}
-        name="time"
-        type="time"
-        disabled={isPending}
-      />
-      <FormInput
         name="price"
         type="number"
         control={form.control}
         disabled={isPending}
       />
       <Button type="submit" disabled={isPending} className="w-full">
-        Create Flight
+        Save
       </Button>
     </FormWrapper>
   );

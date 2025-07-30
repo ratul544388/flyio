@@ -1,10 +1,9 @@
-import { FlightForm } from '@/features/flights/components/flight-form'
-import React from 'react'
+import { CreateFlightForm } from '@/features/flights/components/create-flight-form'
 
 const NewFightPage = () => {
   return (
     <div className='py-10'>
-      <FlightForm/>
+      <CreateFlightForm/>
     </div>
   )
 }

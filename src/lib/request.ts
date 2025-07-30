@@ -17,11 +17,22 @@ export async function request<Data = unknown, Response = unknown>({
   data,
   params,
 }: RequestOptions<Data>): Promise<Response> {
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+
   const res: AxiosResponse<Response> = await axios.request({
     method,
     url: `${API_URL}/api${url}`,
     data,
     params,
+    ...(token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      : {}),
   });
 
   return res.data;
