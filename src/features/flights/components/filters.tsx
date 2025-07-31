@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FlightFilters } from "../types";
 
-export const Filters = () => {
+export const Filters = ({ onFilter }: { onFilter?: () => void }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [filters, setFilters] = useState<FlightFilters>({});
@@ -56,12 +56,14 @@ export const Filters = () => {
     params.set("maxPrice", String(priceRange[1]));
 
     router.push(`/flights?${params.toString()}`);
+    onFilter?.();
   };
 
   const handleClearFilters = () => {
     setFilters({});
     setPriceRange([0, 2000]);
     router.push("/flights");
+    onFilter?.();
   };
 
   return (

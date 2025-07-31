@@ -22,7 +22,10 @@ export const DeleteFlightModal = () => {
   const router = useRouter();
   const { open, type, data, onClose } = useModalStore();
 
-  const { mutate, isPending } = useMutation<ApiResponse, AxiosError<ApiErrorResponse>>({
+  const { mutate, isPending } = useMutation<
+    ApiResponse,
+    AxiosError<ApiErrorResponse>
+  >({
     mutationFn: () =>
       request({
         method: "DELETE",
@@ -38,30 +41,27 @@ export const DeleteFlightModal = () => {
     },
   });
 
-  const isOpen = type === "confirmModal" && open;
+  const isOpen = type === "deleteFlight" && open;
 
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(val) => {
-        if (!isPending && !val) onClose();
-      }}
-    >
-      <DialogContent
-        onEscapeKeyDown={(e) => isPending && e.preventDefault()}
-        onPointerDownOutside={(e) => isPending && e.preventDefault()}
-      >
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-            This will permanently delete the flight. This action cannot be undone.
+            This will permanently delete the flight. This action cannot be
+            undone.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="flex mt-3 justify-end gap-3">
+        <DialogFooter className="mt-3 flex justify-end gap-3">
           <Button variant="outline" disabled={isPending} onClick={onClose}>
             Cancel
           </Button>
-          <Button variant="destructive" disabled={isPending} onClick={() => mutate()}>
+          <Button
+            variant="destructive"
+            disabled={isPending}
+            onClick={() => mutate()}
+          >
             {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Delete
           </Button>

@@ -13,8 +13,11 @@ export const HeaderRight = () => {
   const pathname = usePathname();
   return (
     <div className="flex items-center gap-3">
-      {user?.role === "ADMIN" && (
-        <Link href="/flights/new" className={buttonVariants()}>
+      {user?.role === "ADMIN" && pathname !== "/flights/new" && (
+        <Link
+          href="/flights/new"
+          className={buttonVariants({ className: "hidden! sm:flex!" })}
+        >
           <PlusCircle />
           Add New
         </Link>

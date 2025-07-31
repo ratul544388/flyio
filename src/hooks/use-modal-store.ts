@@ -1,12 +1,17 @@
 import { Seat } from "@/features/flights/types";
 import { create } from "zustand";
 
-type ModalType = "confirmModal" | "bookingModal" | "deleteBooking" | null;
+type ModalType =
+  | "deleteFlight"
+  | "bookingModal"
+  | "deleteBooking"
+  | "updateBooking"
+  | null;
 
 type ModalData = {
   flightId?: string;
   bookingId?: string;
-  seats?: Seat[]
+  seats?: Seat[];
 };
 
 type UseModalStore = {

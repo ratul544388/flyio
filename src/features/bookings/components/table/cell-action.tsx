@@ -1,16 +1,16 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Booking } from "../../types";
-import { useState } from "react";
-import { DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Edit, Icon, MoreVertical, Plane, Trash } from "lucide-react";
+import { useModalStore } from "@/hooks/use-modal-store";
+import { Edit, MoreVertical, Plane, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Booking } from "../../types";
 
 interface CellActionProps {
   booking: Booking;
@@ -18,6 +18,8 @@ interface CellActionProps {
 
 export const CellAction = ({ booking }: CellActionProps) => {
   const router = useRouter();
+  const { onOpen } = useModalStore();
+
   const items = [
     {
       label: "View Flight",
@@ -27,14 +29,20 @@ export const CellAction = ({ booking }: CellActionProps) => {
     {
       label: "Update Booking",
       icon: Edit,
-      onClick: () => {},
+      onClick: () =>
+        onOpen("updateBooking", {
+          flightId: booking.flightId._id,
+          bookingId: booking._id,
+          seats: booking.seatsBooked.map((seat) => seat),
+        }),
     },
     {
       label: "Delete Booking",
       icon: Trash,
-      onClick: () => {},
+      onClick: () => onOpen("deleteBooking", { bookingId: booking._id }),
     },
   ];
+
   const [open, setOpen] = useState(false);
   return (
     <Popover open={open} onOpenChange={setOpen}>

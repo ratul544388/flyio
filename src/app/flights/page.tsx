@@ -1,6 +1,7 @@
 import { API_URL } from "@/constants";
 import { Filters } from "@/features/flights/components/filters";
 import { FlightCard } from "@/features/flights/components/flight-card";
+import { MobileFilters } from "@/features/flights/components/mobile-filters";
 import { Flight } from "@/features/flights/types";
 import { buildQueryString } from "@/lib/utils";
 import { ApiResponse } from "@/types/api";
@@ -27,12 +28,13 @@ const FlightsPage = async ({
   }: ApiResponse<{ flights: Flight[] }> = await res.json();
 
   return (
-    <div className="flex gap-5">
+    <div className="flex flex-col sm:flex-row gap-5">
       <aside className="sticky top-[86px] hidden h-[calc(100vh_-_100px)] min-w-[280px] rounded-lg border p-4 sm:block">
         <Suspense fallback="">
           <Filters />
         </Suspense>
       </aside>
+      <MobileFilters/>
       <ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] gap-5">
         {flights.map((flight) => (
           <FlightCard key={flight._id} flight={flight} />

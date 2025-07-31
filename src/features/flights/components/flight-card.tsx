@@ -71,7 +71,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  onOpen("confirmModal", { flightId: flight._id });
+                  onOpen("deleteFlight", { flightId: flight._id });
                 }}
                 variant="outline"
                 size="icon"

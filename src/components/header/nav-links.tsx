@@ -8,9 +8,9 @@ import { buttonVariants } from "../ui/button";
 
 const NavLinks = () => {
   const pathname = usePathname();
-  const {user} = useUser()
+  const { user } = useUser();
   return (
-    <nav className="flex-1">
+    <nav className="hidden sm:block">
       <ul className="flex">
         {navLinks(user).map(({ href, label }) => {
           const isActive = pathname === href;
@@ -27,7 +27,7 @@ const NavLinks = () => {
                   {isActive && (
                     <motion.span
                       layoutId="ActiveNavLink"
-                      className="absolute inset-x-0 bg-primary -bottom-2 h-1 rounded-full"
+                      className="bg-primary absolute inset-x-0 -bottom-2 h-1 rounded-full"
                     />
                   )}
                 </span>

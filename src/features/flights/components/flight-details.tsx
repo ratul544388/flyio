@@ -14,7 +14,7 @@ type FlightDetailsProps = {
 
 export const FlightDetails = ({ flight, seats }: FlightDetailsProps) => {
   return (
-    <>
+    <div>
       <h1 className="mb-2 text-3xl font-bold">Flight Details</h1>
       <p className="text-muted-foreground mb-6">
         Explore complete information about this flight.
@@ -90,6 +90,6 @@ export const FlightDetails = ({ flight, seats }: FlightDetailsProps) => {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 };

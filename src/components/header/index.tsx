@@ -1,14 +1,18 @@
 import { Container } from "../container";
 import { Logo } from "../logo";
 import { HeaderRight } from "./header-right";
+import { MobileSidebar } from "./mobile-sidebar";
 import NavLinks from "./nav-links";
 
 export const Header = () => {
   return (
-    <header className="h-header sticky z-50 top-0 bg-secondary border-b">
-      <Container className="h-full justify-between text-white flex items-center">
+    <header className="h-header bg-secondary sticky top-0 z-50 border-b">
+      <Container className="flex h-full items-center justify-between text-white">
         <div className="flex items-center gap-8">
-          <Logo />
+          <div className="flex items-center gap-3">
+            <MobileSidebar />
+            <Logo />
+          </div>
           <NavLinks />
         </div>
         <HeaderRight />

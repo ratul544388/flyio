@@ -43,6 +43,7 @@ export const columns: ColumnDef<Booking>[] = [
   },
   {
     accessorKey: "_id",
+    header: "Action",
     cell: ({ row }) => <CellAction booking={row.original} />,
   },
 ];
