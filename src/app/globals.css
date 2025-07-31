@@ -43,6 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --spacing-header: 70px;
   --spacing-main: calc(100vh - var(--spacing-header));
+  --spacing-page: 18px;
 }
 
 :root {

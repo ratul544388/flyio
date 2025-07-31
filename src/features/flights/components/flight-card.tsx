@@ -22,7 +22,7 @@ export const FlightCard = ({ flight }: FlightCardProps) => {
   return (
     <motion.li
       whileHover={{ scale: 1.04, transition: { duration: 0.3 } }}
-      className="max-w-[350px] mx-auto w-full justify-between rounded-lg border bg-background shadow-sm transition-shadow duration-200 hover:shadow-md"
+      className="mx-auto w-full justify-between rounded-lg border bg-background shadow-sm transition-shadow duration-200 hover:shadow-md"
     >
       <Link className="p-5 flex flex-col h-full justify-between" href={`/flights/${flight._id}`}>
         <div className="">

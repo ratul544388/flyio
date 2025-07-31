@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useConfirmSeats } from "../hooks/use-confirm-seats";
 import { Flight, Seat } from "../types";
 import BookingModal from "./booking-modal";
+import { useUser } from "@/providers/user-context-provider";
+import { useRouter } from "next/navigation";
 
 interface BookingButtonsProps {
   flight: Flight;
@@ -14,9 +16,11 @@ interface BookingButtonsProps {
 
 export const BookingButtons = ({ flight, seats }: BookingButtonsProps) => {
   const { onOpen } = useModalStore();
+  const { user } = useUser();
   const { confirmSeats, isPending } = useConfirmSeats();
   const [reservedSeats, setReservedSeats] = useState<string[]>([]);
   const [confirmCountDown, setConfirmCountdown] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,12 +40,15 @@ export const BookingButtons = ({ flight, seats }: BookingButtonsProps) => {
     <div className="ml-auto">
       {flight.availability && !!!confirmCountDown && (
         <Button
-          onClick={() =>
+          onClick={() => {
+            if (!user) {
+              return router.push("/login");
+            }
             onOpen("bookingModal", {
               flightId: flight._id,
               seats: seats.filter((s) => !s.isBooked),
-            })
-          }
+            });
+          }}
           className="ml-auto"
         >
           Book now

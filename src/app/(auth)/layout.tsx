@@ -1,12 +1,13 @@
 "use client";
+import { Container } from "@/components/container";
 import { PropsWithChildren } from "react";
 
 const AuthLayout = ({ children }: PropsWithChildren) => {
 
   return (
-    <div className="min-h-main flex py-6 items-center justify-center">
+    <Container className="min-h-main flex py-10 items-center justify-center">
       {children}
-    </div>
+    </Container>
   );
 };
 

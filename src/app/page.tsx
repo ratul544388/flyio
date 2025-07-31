@@ -1,4 +1,6 @@
 import { Hero } from "@/features/home/components/hero";
+import Testimonials from "@/features/home/components/testimonials";
+import { WhyChooseUs } from "@/features/home/components/why-choose-us";
 import { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
@@ -9,9 +11,11 @@ export const generateMetadata = (): Metadata => {
 
 const Home = () => {
   return (
-    <div>
+    <main>
       <Hero />
-    </div>
+      <WhyChooseUs/>
+      <Testimonials/>
+    </main>
   );
 };
 

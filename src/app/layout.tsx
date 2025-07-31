@@ -1,12 +1,12 @@
+import Footer from "@/components/footer";
 import { Header } from "@/components/header";
+import { ModalProvider } from "@/providers/modal-provider";
+import ReactQueryProvider from "@/providers/react-query-provider";
 import { UserContextProvider } from "@/providers/user-context-provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "sonner";
-import ReactQueryProvider from "@/providers/react-query-provider";
-import { ModalProvider } from "@/providers/modal-provider";
-import { Container } from "@/components/container";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,11 +38,10 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <ReactQueryProvider>
-            <Header />
             <ModalProvider />
-            <Container elem="main" className="py-4">
-              {children}
-            </Container>
+            <Header />
+            {children}
+            <Footer />
             <Toaster />
           </ReactQueryProvider>
         </UserContextProvider>

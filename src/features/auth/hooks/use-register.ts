@@ -16,8 +16,8 @@ export const useRegister = () => {
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
-      email: "ratul@gmail.com",
-      password: "Ratul544@",
+      email: "",
+      password: "",
       gender: undefined,
       phone: "",
     },
@@ -35,7 +35,7 @@ export const useRegister = () => {
       }),
     onSuccess: (response) => {
       router.push("/flights");
-      console.log(response)
+      console.log(response);
       setToken(response.data.token);
       toast.success(response.message);
       toast.success("Account created successfully");

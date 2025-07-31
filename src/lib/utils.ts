@@ -9,6 +9,7 @@ export function buildQueryString(
   params: Record<string, string | string[] | undefined>,
 ): string {
   const query = new URLSearchParams();
+  query.append("limit", "10");
 
   Object.entries(params).forEach(([key, value]) => {
     if (typeof value === "string") {
@@ -54,4 +55,3 @@ export const formatDate = (isoDate: string): string => {
   const date = new Date(isoDate);
   return format(date, "dd MMMM yyyy");
 };
-

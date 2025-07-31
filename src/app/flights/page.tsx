@@ -1,7 +1,10 @@
+import { Container } from "@/components/container";
+import { Pagination } from "@/components/pagination";
 import { API_URL } from "@/constants";
 import { Filters } from "@/features/flights/components/filters";
 import { FlightCard } from "@/features/flights/components/flight-card";
 import { MobileFilters } from "@/features/flights/components/mobile-filters";
+import NoFlightsFound from "@/features/flights/components/no-flights-found";
 import { Flight } from "@/features/flights/types";
 import { buildQueryString } from "@/lib/utils";
 import { ApiResponse } from "@/types/api";
@@ -30,19 +33,23 @@ const FlightsPage = async ({
   }: ApiResponse<{ flights: Flight[] }> = await res.json();
 
   return (
-    <div className="flex flex-col gap-5 sm:flex-row">
-      <aside className="sticky top-[86px] hidden h-[calc(100vh_-_100px)] min-w-[280px] rounded-lg border p-4 sm:block">
+    <Container elem="main" className="pt-page flex flex-col gap-5 md:flex-row">
+      <aside className="sticky top-[86px] hidden h-[calc(100vh_-_100px)] min-w-[280px] rounded-lg border p-4 md:block">
         <Suspense fallback="">
           <Filters />
         </Suspense>
       </aside>
       <MobileFilters />
-      <ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] gap-5">
-        {flights.map((flight) => (
-          <FlightCard key={flight._id} flight={flight} />
-        ))}
-      </ul>
-    </div>
+      <div className="w-full">
+        {flights.length === 0 && <NoFlightsFound />}
+        <ul className="grid w-full grid-cols-[repeat(auto-fit,_minmax(250px,1fr))] gap-5">
+          {flights.map((flight) => (
+            <FlightCard key={flight._id} flight={flight} />
+          ))}
+        </ul>
+        <Pagination dataCount={200} className="mt-7" />
+      </div>
+    </Container>
   );
 };
 

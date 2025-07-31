@@ -18,7 +18,7 @@ export const MobileFilters = () => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="relative z-20 ml-auto w-fit sm:hidden"
+          className="relative z-20 ml-auto w-fit md:hidden"
         >
           <Filter />
           Filters
